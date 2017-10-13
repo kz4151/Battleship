@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 // Main class for gameplay
@@ -24,6 +25,21 @@ public class Game {
                 printP2Grid();
             }
         }
+        if(player1) {
+            System.out.println("Input any character to set up ships for player 2");
+            sc.next();
+            for(int i = 0; i < 25; i++) {
+                System.out.println();
+            }
+        }
+        else {
+            System.out.println("Press any character to start the game");
+            sc.next();
+            for(int i = 0; i < 25; i++) {
+                System.out.println();
+            }
+        }
+        
     }
 
     public void printP1Grid() {
