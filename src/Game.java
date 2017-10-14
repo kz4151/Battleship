@@ -49,6 +49,14 @@ public class Game {
     public void printP2Grid() {
         p2.printGrid();
     }
+    
+    public void printP1GameGrid() {
+        p1.printGameGrid();
+    }
+    
+    public void printP2GameGrid() {
+        p2.printGameGrid();
+    }
 
     public void setShipPositions(int type, boolean player1) {
         boolean init = false;

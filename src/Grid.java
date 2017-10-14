@@ -1,13 +1,12 @@
 
 public class Grid {
     private char[][] gameGrid;
-    private boolean[] airCar;
-    private boolean[] battle;
-    private boolean[] cruise;
-    private boolean[] des1;
-    private boolean[] des2;
-    private boolean sub1;
-    private boolean sub2;
+    private int airCar;
+    private int battle;
+    private int cruise;
+    private int des1;
+    private int des2;
+    private int shipCounter;
 
     public Grid() {
         gameGrid = new char[10][10]; // Initializes 10 x 10 game grid
@@ -16,11 +15,12 @@ public class Grid {
                 gameGrid[i][j] = ' ';
             }
         }
-        airCar = new boolean[5];
-        battle = new boolean[4];
-        cruise = new boolean[3];
-        des1 = new boolean[2];
-        des2 = new boolean[2];
+        airCar = 0;
+        battle = 0;
+        cruise = 0;
+        des1 = 0;
+        des2 = 0;
+        shipCounter = 0;
     }
 
     public int setShip(int x, int y, boolean vert, int type) {
@@ -29,13 +29,14 @@ public class Grid {
         // A = Air Carrier, B = Battleship, C = Cruiseship, D = Destroyer 1, E =
         // Destroyer 2, S =
         // Submarine 1, U = Submarine 2
-        if(x > 10 || y > 10) {
+        if(x > 10 && x < 0 || y > 10 && y < 0) {
             return 0;
         }
         boolean shipSet = false;
         if (type == 5) {
             if(gameGrid[x][y] == ' ') {
                 gameGrid[x][y] = 'S';
+                return 1;
             }
             else {
                 return 2;
@@ -44,6 +45,7 @@ public class Grid {
         else if (type == 6) {
             if(gameGrid[x][y] == ' ') {
                 gameGrid[x][y] = 'U';
+                return 1;
             }
             else {
                 return 2;
@@ -58,11 +60,9 @@ public class Grid {
             }
         }
         if(shipSet) {
-            System.out.println(1);
             return 1;
         }
         else {
-            System.out.println(2);
             return 2;
         }
     }
@@ -76,6 +76,37 @@ public class Grid {
             System.out.print(" |\n");
             System.out.println(" -----------------------------------------");
         }
+    }
+    
+    public void printGameGrid() {
+        System.out.println(" -----------------------------------------");
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if(gameGrid[j][i] == ' ' || gameGrid[j][i] == '/' || gameGrid[j][i] == 'X') {
+                    System.out.print(" | " + gameGrid[j][i]);
+                }
+                else {
+                    System.out.print(" |  ");
+                }
+            }
+            System.out.print(" |\n");
+            System.out.println(" -----------------------------------------");
+        }
+    }
+    
+    public boolean setMarker(int x, int y) {
+        boolean set = false;
+        if(gameGrid[x][y] == 'X' || gameGrid[x][y] == '/') {
+            System.out.println("You have already selected these coordinates");
+        }
+        else if(gameGrid[x][y] == ' ') {
+            gameGrid[x][y] = '/';
+            set = true;
+        }
+        else {
+            shipStruck(x,y);
+        }
+        return set;
     }
 
     private int getShipSize(int shipType) {
@@ -203,5 +234,54 @@ public class Grid {
         }
         
     }
+    
+    private boolean shipStruck(int x, int y) {
+        boolean gameOver = false;
+        if(gameGrid[x][y] == 'A') {
+            airCar++;
+            if(airCar == 5) {
+                System.out.println("Air Carrier has been sunk!");
+            }
+        }
+        else if(gameGrid[x][y] == 'B') {
+            battle++;
+            if(battle == 4) {
+                System.out.println("Battleship has been sunk!");
+            }
+        }
+        else if(gameGrid[x][y] == 'C') {
+            cruise++;
+            if(cruise == 3) {
+                System.out.println("Cruiseship has been sunk!");
+            }
+        }
+        else if(gameGrid[x][y] == 'D') {
+            des1++;
+            if(des1 == 2) {
+                System.out.println("Destroyer 1 has been sunk!");
+            }
+        }
+        else if(gameGrid[x][y] == 'E') {
+            des2++;
+            if(des2 == 2) {
+                System.out.println("Destroyer 2 has been sunk!");
+            }
+        }
+        else if(gameGrid[x][y] == 'S') {
+            shipCounter++;
+            System.out.println("Submarine 1 has been sunk!");
+        }
+        else {
+            shipCounter++;
+            System.out.println("Submarine 2 has been sunk!");
+        }
+        gameGrid[x][y] = 'X';
+        if(shipCounter == 7) {
+            System.out.println("All ships has been sunk! Game over!");
+            gameOver = true;
+        }
+        return gameOver;
+    }
+    
 
 }
