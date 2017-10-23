@@ -101,9 +101,11 @@ public class Grid {
         }
         else if(gameGrid[x][y] == ' ') {
             gameGrid[x][y] = '/';
+            System.out.println("You missed!");
             set = true;
         }
         else {
+            System.out.println("You struck a ship!");
             shipStruck(x,y);
         }
         return set;
