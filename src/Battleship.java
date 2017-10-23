@@ -9,42 +9,41 @@ public class Battleship {
         // battle.initShips(false);
         boolean gameOver = false;
         boolean legalCoor;
-        String turnString;
+        boolean even = false;
         int turn = 0;
         Scanner sc = new Scanner(System.in);
-        int x;
-        int y;
+        int x = 0;
+        int y = 0;
         while (!gameOver) {
             turn++;
             legalCoor = false;
             if (turn % 2 == 0) {
                 // Player 2's turn
                 System.out.println("Player 2's Turn");
-                while (!legalCoor) {
-                    System.out.println("Enter a X-coordinate between 0-9.");
-                    x = sc.nextInt();
-                    System.out.println("Enter a Y-coordinate between 0-9.");
-                    y = sc.nextInt();
-                    legalCoor = checkUserInput(x, y);
-                }
-                battle.printP1GameGrid();
-                System.out.println("Press any key to end your turn");
-                sc.next();
+                even = true;
             }
             else {
                 // Player 1's turn
                 System.out.println("Player 1's Turn");
-                while (!legalCoor) {
-                    System.out.println("Enter a X-coordinate between 0-9.");
-                    x = sc.nextInt();
-                    System.out.println("Enter a Y-coordinate between 0-9.");
-                    y = sc.nextInt();
-                    legalCoor = checkUserInput(x, y);
-                }
-                battle.printP2GameGrid();
-                System.out.println("Press any key to end your turn");
-                sc.next();
+                even = false;
             }
+            while (!legalCoor) {
+                System.out.println("Enter a X-coordinate between 0-9.");
+                x = sc.nextInt();
+                System.out.println("Enter a Y-coordinate between 0-9.");
+                y = sc.nextInt();
+                legalCoor = checkUserInput(x, y);
+            }
+            if(even) {
+                battle.setP2Marker(x, y);
+                battle.printP2GameGrid();
+            }
+            else {
+                battle.setP1Marker(x,  y);
+                battle.printP1GameGrid();
+            }
+            System.out.println("Press any key to end your turn");
+            sc.next();
         }
     }
 

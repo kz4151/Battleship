@@ -57,6 +57,14 @@ public class Game {
     public void printP2GameGrid() {
         p2.printGameGrid();
     }
+    
+    public boolean setP1Marker(int x, int y) {
+        return p1.setMarker(x, y);
+    }
+    
+    public boolean setP2Marker(int x, int y) {
+        return p2.setMarker(x, y);
+    }
 
     public void setShipPositions(int type, boolean player1) {
         boolean init = false;
