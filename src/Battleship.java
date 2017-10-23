@@ -5,8 +5,8 @@ public class Battleship {
     public static void main(String[] args) {
         // This is the main file for the program.
         Game battle = new Game();
-        // battle.initShips(true);
-        // battle.initShips(false);
+        battle.initShips(true);
+        battle.initShips(false);
         boolean gameOver = false;
         boolean legalCoor;
         boolean even = false;
@@ -20,11 +20,13 @@ public class Battleship {
             if (turn % 2 == 0) {
                 // Player 2's turn
                 System.out.println("Player 2's Turn");
+                battle.printP1GameGrid();
                 even = true;
             }
             else {
                 // Player 1's turn
                 System.out.println("Player 1's Turn");
+                battle.printP2GameGrid();
                 even = false;
             }
             while (!legalCoor) {
@@ -35,12 +37,14 @@ public class Battleship {
                 legalCoor = checkUserInput(x, y);
             }
             if(even) {
-                battle.setP2Marker(x, y);
-                battle.printP2GameGrid();
+                battle.setP1Marker(x, y);
+                battle.printP1GameGrid();
+                gameOver = battle.checkP1GameOver();
             }
             else {
-                battle.setP1Marker(x,  y);
-                battle.printP1GameGrid();
+                battle.setP2Marker(x, y);
+                battle.printP2GameGrid();
+                gameOver = battle.checkP2GameOver();
             }
             System.out.println("Press any key to end your turn");
             sc.next();

@@ -65,6 +65,14 @@ public class Game {
     public boolean setP2Marker(int x, int y) {
         return p2.setMarker(x, y);
     }
+    
+    public boolean checkP1GameOver() {
+        return p1.checkGame();
+    }
+    
+    public boolean checkP2GameOver() {
+        return p2.checkGame();
+    }
 
     public void setShipPositions(int type, boolean player1) {
         boolean init = false;

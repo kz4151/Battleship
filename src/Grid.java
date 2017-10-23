@@ -110,6 +110,16 @@ public class Grid {
         }
         return set;
     }
+    
+    public boolean checkGame() {
+        if(shipCounter == 7) {
+            System.out.println("All ships has been sunk! Game over!");
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
     private int getShipSize(int shipType) {
         int shipSize = 0;
@@ -237,8 +247,7 @@ public class Grid {
         
     }
     
-    private boolean shipStruck(int x, int y) {
-        boolean gameOver = false;
+    private void shipStruck(int x, int y) {
         if(gameGrid[x][y] == 'A') {
             airCar++;
             if(airCar == 5) {
@@ -278,12 +287,9 @@ public class Grid {
             System.out.println("Submarine 2 has been sunk!");
         }
         gameGrid[x][y] = 'X';
-        if(shipCounter == 7) {
-            System.out.println("All ships has been sunk! Game over!");
-            gameOver = true;
-        }
-        return gameOver;
     }
+    
+    
     
 
 }
