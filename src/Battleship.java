@@ -9,6 +9,7 @@ public class Battleship {
         // battle.initShips(false);
         boolean gameOver = false;
         boolean legalCoor;
+        String turnString;
         int turn = 0;
         Scanner sc = new Scanner(System.in);
         int x;
@@ -48,12 +49,12 @@ public class Battleship {
     }
 
     public static boolean checkUserInput(int x, int y) {
-        if ((x > 10 || x < 0)) {
+        if ((x > 9 || x < 0)) {
             System.out.println(
                     "Please input X-Coordinates that are between 0 to 9");
             return false;
         }
-        else if (y > 10 || y < 0) {
+        else if (y > 9 || y < 0) {
             System.out.println(
                     "Please input Y-Coordinates that are between 0 to 9");
             return false;
