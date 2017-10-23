@@ -40,11 +40,17 @@ public class Battleship {
                 battle.setP1Marker(x, y);
                 battle.printP1GameGrid();
                 gameOver = battle.checkP1GameOver();
+                if(gameOver) {
+                    System.out.println("Player 2 has won the game!");
+                }
             }
             else {
                 battle.setP2Marker(x, y);
                 battle.printP2GameGrid();
                 gameOver = battle.checkP2GameOver();
+                if(gameOver) {
+                    System.out.println("Player 1 has won the game!");
+                }
             }
             System.out.println("Press any key to end your turn");
             sc.next();
